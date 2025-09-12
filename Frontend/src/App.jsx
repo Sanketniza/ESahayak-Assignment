@@ -6,6 +6,7 @@ import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
 import NewBuyerPage from './pages/NewBuyerPage'
 import BuyersListPage from './pages/BuyersListPage'
+import BuyerDetailPage from './pages/BuyerDetailPage'
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/buyers/new" element={<NewBuyerPage />} />
           <Route path="/buyers" element={<BuyersListPage />} />
-          {/* Add more routes as they are implemented */}
+          <Route path="/buyers/:id" element={<BuyerDetailPage />} />
+          <Route path="/buyers/:id/edit" element={<BuyerDetailPage mode="edit" />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Layout>
