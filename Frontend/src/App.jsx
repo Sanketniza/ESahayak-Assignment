@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
 import NewBuyerPage from './pages/NewBuyerPage'
+import BuyersListPage from './pages/BuyersListPage'
 
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/buyers/new" element={<NewBuyerPage />} />
+          <Route path="/buyers" element={<BuyersListPage />} />
           {/* Add more routes as they are implemented */}
-          <Route path="/buyers" element={<div className="container mx-auto py-8 px-4"><h1 className="text-2xl font-bold">Buyers List</h1><p className="mt-4">This page will be implemented in the next phase.</p></div>} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Layout>
