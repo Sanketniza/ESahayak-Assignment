@@ -2,7 +2,6 @@
 
 **Goal:** Build a small app to **capture, list, and manage buyer leads** with sane validation, search/filter, and CSV import/export.
 
-**Deadline:** 15th September 2025 by 13:00 IST
 
 **Deliverables:** Public GitHub repo (+ optional Vercel deploy) and a short README.
 
@@ -10,8 +9,8 @@
 
 ## Stack (must)
 
-- Next.js (App Router) + TypeScript
-- DB: Postgres/Supabase/SQLite with Drizzle or Prisma + **migrations**
+- Express.Js(App Router) + JavaScript 
+- DB: Postgres/Supabase 
 - Zod for validation
 - Auth: simple magic link or demo login
 - Git with meaningful commits
@@ -44,7 +43,7 @@
 
 - `id`, `buyerId`, `changedBy`, `changedAt`, `diff` (JSON of changed fields)
 
----
+------------------------------------------------------------------------------------------
 
 ## Pages & Flows (must)
 
