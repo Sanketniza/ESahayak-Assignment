@@ -303,12 +303,12 @@ const BuyerDetail = ({ buyerId, mode = 'view', onNotFound }) => {
       )}
 
       {/* Buyer Form */}
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+  <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Hidden updatedAt field for concurrency control */}
         <input type="hidden" {...register('updatedAt')} />
 
         {/* Personal Information */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+  <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
           <h2 className="text-lg font-medium mb-4 text-gray-700">Personal Information</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -409,7 +409,7 @@ const BuyerDetail = ({ buyerId, mode = 'view', onNotFound }) => {
         </div>
         
         {/* Property Information */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+  <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
           <h2 className="text-lg font-medium mb-4 text-gray-700">Property Requirements</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -579,7 +579,7 @@ const BuyerDetail = ({ buyerId, mode = 'view', onNotFound }) => {
         </div>
         
         {/* Additional Information */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+  <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
           <h2 className="text-lg font-medium mb-4 text-gray-700">Additional Information</h2>
           
           <div className="space-y-6">

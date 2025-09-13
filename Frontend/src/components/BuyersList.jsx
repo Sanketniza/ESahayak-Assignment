@@ -168,7 +168,8 @@ const BuyersList = () => {
   };
 
   return (
-    <div className="bg-white px-4 py-8 sm:px-6 lg:px-8">
+    <div className="px-0 py-4 sm:px-0 lg:px-0">
+      <div className="bg-white rounded-xl shadow-sm p-6">
       <div className="sm:flex sm:items-center sm:justify-between mb-6">
         <div>
           <h1 className="text-2xl font-semibold text-gray-900">Buyer Leads</h1>
@@ -209,7 +210,7 @@ const BuyersList = () => {
       </div>
 
       {/* Search and Filters */}
-      <div className="mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
+  <div className="mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
           {/* Search Input */}
           <div className="col-span-1 md:col-span-2 lg:col-span-1">
@@ -428,17 +429,14 @@ const BuyersList = () => {
         </div>
       </div>
 
-      {/* Pagination */}
+      </div> {/* close card */}
+
       {totalPages > 1 && (
         <div className="mt-6">
-          <Pagination
-            currentPage={page}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
+          <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
         </div>
       )}
-      
+
       {/* CSV Import Modal */}
       <Modal
         isOpen={isImportModalOpen}

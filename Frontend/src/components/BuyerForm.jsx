@@ -96,7 +96,7 @@ const BuyerForm = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-md">
       <h1 className="text-2xl font-semibold mb-6 text-gray-800">Create New Buyer Lead</h1>
       
       {serverError && (
@@ -107,7 +107,7 @@ const BuyerForm = () => {
       
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Personal Information */}
-        <div className="bg-gray-50 p-4 rounded-md">
+  <div className="bg-gray-50 p-4 rounded-md">
           <h2 className="text-lg font-medium mb-4 text-gray-700">Personal Information</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -187,7 +187,7 @@ const BuyerForm = () => {
         </div>
         
         {/* Property Information */}
-        <div className="bg-gray-50 p-4 rounded-md">
+  <div className="bg-gray-50 p-4 rounded-md">
           <h2 className="text-lg font-medium mb-4 text-gray-700">Property Requirements</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -314,7 +314,7 @@ const BuyerForm = () => {
         </div>
         
         {/* Additional Information */}
-        <div className="bg-gray-50 p-4 rounded-md">
+  <div className="bg-gray-50 p-4 rounded-md">
           <h2 className="text-lg font-medium mb-4 text-gray-700">Additional Information</h2>
           
           <div className="space-y-6">
