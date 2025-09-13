@@ -10,6 +10,37 @@ const apiClient = axios.create({
   },
 });
 
+// Request interceptor for adding auth token
+apiClient.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Response interceptor for handling errors
+apiClient.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      // Unauthorized error - clear token and redirect to login
+      localStorage.removeItem('token');
+      if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
+        window.location.href = '/login';
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 // API functions for buyers
 export const buyersApi = {
   // Get all buyers with optional filters
@@ -65,7 +96,50 @@ export const buyersApi = {
       console.error(`Error deleting buyer with ID ${id}:`, error);
       throw error;
     }
-  }
+  },
+  
+  // Export buyers to CSV
+  exportCSV: async (filters = {}) => {
+    try {
+      const response = await apiClient.get('/buyers/export', {
+        params: filters,
+        responseType: 'blob',
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error exporting buyers to CSV:', error);
+      throw error;
+    }
+  },
+  
+  // Import buyers from CSV
+  importCSV: async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append('csvFile', file);
+      
+      const response = await apiClient.post('/buyers/import', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error importing buyers from CSV:', error);
+      throw error;
+    }
+  },
+  
+  // Get change history for a buyer
+  getHistory: async (id) => {
+    try {
+      const response = await apiClient.get(`/buyers/${id}/history`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching history for buyer with ID ${id}:`, error);
+      throw error;
+    }
+  },
 };
 
 export default apiClient;
