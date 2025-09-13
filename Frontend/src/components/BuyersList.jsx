@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useQueryParams } from '../../hooks/useQueryParams';
-import { useDebounce } from '../../hooks/useDebounce';
-import { SelectFilter, SearchInput, Pagination } from '../common/Filters';
-import { buyersApi } from '../../services/api';
+import { useQueryParams } from '../hooks/useQueryParams';
+import { useDebounce } from '../hooks/useDebounce';
+import { SelectFilter, SearchInput, Pagination } from './common/Filters';
+import { buyersApi } from '../services/api';
+import Modal from './common/Modal';
+import CSVImport from './CSVImport';
 
 // Filter options
 const cityOptions = [
@@ -77,6 +79,7 @@ const BuyersList = () => {
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [isImportModalOpen, setIsImportModalOpen] = useState(false);
 
   // Fetch buyers when URL params change
   useEffect(() => {
@@ -173,7 +176,29 @@ const BuyersList = () => {
             A list of all buyer leads in your account including their details.
           </p>
         </div>
-        <div className="mt-4 sm:mt-0">
+        <div className="mt-4 sm:mt-0 flex flex-col sm:flex-row gap-2">
+          {/* CSV Import/Export buttons */}
+          <div className="flex space-x-2 mb-2 sm:mb-0">
+            <button
+              onClick={() => setIsImportModalOpen(true)}
+              className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+              </svg>
+              Import CSV
+            </button>
+            <a
+              href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/buyers/export-csv${window.location.search}`}
+              download
+              className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Export CSV
+            </a>
+          </div>
           <Link
             to="/buyers/new"
             className="inline-flex items-center justify-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -413,6 +438,24 @@ const BuyersList = () => {
           />
         </div>
       )}
+      
+      {/* CSV Import Modal */}
+      <Modal
+        isOpen={isImportModalOpen}
+        onClose={() => setIsImportModalOpen(false)}
+        title="Import Buyers from CSV"
+      >
+        <CSVImport 
+          onImportComplete={() => {
+            setIsImportModalOpen(false);
+            // Refresh the buyer list
+            setLoading(true);
+            // Small delay to ensure server has time to process
+            setTimeout(() => window.location.reload(), 500);
+          }}
+          onCancel={() => setIsImportModalOpen(false)}
+        />
+      </Modal>
     </div>
   );
 };

@@ -84,7 +84,7 @@
 
 ---
 
-### 4) Import / Export (must)
+### 4) Import / Export (must): done
 
 - **CSV Import** (max 200 rows) with headers:
     
