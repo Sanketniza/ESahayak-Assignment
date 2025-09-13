@@ -24,7 +24,10 @@ app.use(rateLimit()); // Rate limiting
 
 // Define routes
 const buyerRoutes = require('./routes/buyerRoutes');
+const authRoutes = require('./routes/authRoutes');
+
 app.use('/api/buyers', buyerRoutes);
+app.use('/api/auth', authRoutes);
 
 // Basic route for testing
 app.get('/', (req, res) => {
