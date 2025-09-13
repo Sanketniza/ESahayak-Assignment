@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import axios from 'axios';
+import apiClient from '../services/api';
 
 const CSVImport = ({ onImportComplete, onCancel }) => {
   const [file, setFile] = useState(null);
@@ -55,12 +55,10 @@ const CSVImport = ({ onImportComplete, onCancel }) => {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('ownerId', MOCK_OWNER_ID);
-      
-      // Send request to import endpoint
-      const response = await axios.post('/api/buyers/import-csv', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+
+      // Send request to import endpoint via shared api client (includes baseURL and auth)
+      const response = await apiClient.post('/buyers/import-csv', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
       });
       
       setImportResult(response.data);

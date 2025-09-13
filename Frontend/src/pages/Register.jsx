@@ -36,7 +36,7 @@ const Register = () => {
     try {
       await registerUser(data);
       navigate('/buyers');
-    } catch (err) {
+    } catch {
       setSubmitting(false);
     }
   };

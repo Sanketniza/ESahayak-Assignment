@@ -17,7 +17,7 @@ const Login = () => {
     try {
       await login(email, password);
       navigate('/buyers');
-    } catch (_err) {
+    } catch {
       setSubmitting(false);
     }
   };

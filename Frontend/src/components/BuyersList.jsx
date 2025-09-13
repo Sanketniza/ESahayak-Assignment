@@ -88,7 +88,7 @@ const BuyersList = () => {
         setLoading(true);
         setError('');
 
-        const response = await buyersApi.getAll({
+        const result = await buyersApi.getAll({
           page,
           limit,
           city,
@@ -100,9 +100,10 @@ const BuyersList = () => {
           sortOrder
         });
 
-        setBuyers(response.data);
-        setTotalPages(response.totalPages);
-        setTotalCount(response.total);
+        // buyersApi.getAll returns the parsed response body (including data, total, totalPages)
+        setBuyers(result.data || []);
+        setTotalPages(result.totalPages || 1);
+        setTotalCount(result.total || 0);
       } catch (err) {
         console.error('Error fetching buyers:', err);
         setError('Failed to fetch buyers. Please try again later.');
@@ -177,34 +178,38 @@ const BuyersList = () => {
             A list of all buyer leads in your account including their details.
           </p>
         </div>
-        <div className="mt-4 sm:mt-0 flex flex-col sm:flex-row gap-2">
-          {/* CSV Import/Export buttons */}
-          <div className="flex space-x-2 mb-2 sm:mb-0">
+
+        <div className="mt-4 sm:mt-0 flex items-center gap-3">
+          <div className="flex items-center space-x-2">
             <button
               onClick={() => setIsImportModalOpen(true)}
-              className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="inline-flex items-center justify-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none"
+              title="Import buyers from CSV"
             >
               <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
               </svg>
-              Import CSV
+              Import
             </button>
             <a
               href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/buyers/export-csv${window.location.search}`}
               download
-              className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="inline-flex items-center justify-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none"
+              title="Export current buyers as CSV"
             >
               <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              Export CSV
+              Export
             </a>
           </div>
+
           <Link
             to="/buyers/new"
-            className="inline-flex items-center justify-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="inline-flex items-center justify-center px-6 py-3 border border-transparent shadow-xl text-base font-bold rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 transition-all duration-200 transform hover:scale-105"
+            title="Add a new buyer lead"
           >
-            Add New Lead
+            ✚ Add New Lead
           </Link>
         </div>
       </div>
@@ -359,7 +364,7 @@ const BuyersList = () => {
                     </tr>
                   ) : (
                     buyers.map((buyer) => (
-                      <tr key={buyer._id}>
+                      <tr key={buyer._id} className="hover:bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {buyer.fullName}
                         </td>
@@ -454,6 +459,17 @@ const BuyersList = () => {
           onCancel={() => setIsImportModalOpen(false)}
         />
       </Modal>
+
+      {/* Mobile Floating Action Button for adding a new lead */}
+      <Link
+        to="/buyers/new"
+        className="fixed bottom-6 right-6 z-50 inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-600 text-white shadow-2xl hover:bg-green-700 md:hidden transform hover:scale-110 transition-all duration-200"
+        aria-label="Add new buyer lead"
+      >
+        <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" />
+        </svg>
+      </Link>
     </div>
   );
 };
