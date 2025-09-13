@@ -97,7 +97,14 @@ exports.getBuyerById = async (req, res) => {
 exports.createBuyer = async (req, res) => {
   try {
     // Validate request body using Zod
-    const validatedData = validateBuyer(req.body);
+    // Add the current user's ID as the owner
+    const buyerData = { 
+      ...req.body,
+      ownerId: req.user._id 
+    };
+    
+    // Validate request body
+    const validatedData = validateBuyer(buyerData);
     
     // Create buyer
     const buyer = await Buyer.create(validatedData);
@@ -105,7 +112,7 @@ exports.createBuyer = async (req, res) => {
     // Create history entry
     await BuyerHistory.create({
       buyerId: buyer._id,
-      changedBy: validatedData.ownerId,
+      changedBy: req.user._id,
       diff: { action: 'created', ...validatedData }
     });
     
@@ -136,11 +143,11 @@ exports.updateBuyer = async (req, res) => {
       });
     }
     
-    // Check ownership
-    if (buyer.ownerId !== req.body.ownerId) {
+    // Check ownership - allow update if user is admin or owner
+    if (buyer.ownerId !== req.user._id && req.user.role !== 'admin') {
       return res.status(403).json({
         success: false,
-        message: 'Not authorized to update this buyer'
+        message: 'Not authorized to update this buyer. You can only edit your own leads.'
       });
     }
     
@@ -173,7 +180,7 @@ exports.updateBuyer = async (req, res) => {
       // Create history entry
       await BuyerHistory.create({
         buyerId: buyer._id,
-        changedBy: validatedData.ownerId,
+        changedBy: req.user._id,
         diff: changes
       });
       
@@ -213,11 +220,11 @@ exports.deleteBuyer = async (req, res) => {
       });
     }
     
-    // Check ownership
-    if (buyer.ownerId !== req.body.ownerId) {
+    // Check ownership - allow delete if user is admin or owner
+    if (buyer.ownerId !== req.user._id && req.user.role !== 'admin') {
       return res.status(403).json({
         success: false,
-        message: 'Not authorized to delete this buyer'
+        message: 'Not authorized to delete this buyer. You can only delete your own leads.'
       });
     }
     
@@ -227,7 +234,7 @@ exports.deleteBuyer = async (req, res) => {
     // Create history entry for deletion
     await BuyerHistory.create({
       buyerId: buyer._id,
-      changedBy: req.body.ownerId,
+      changedBy: req.user._id,
       diff: { action: 'deleted' }
     });
     
