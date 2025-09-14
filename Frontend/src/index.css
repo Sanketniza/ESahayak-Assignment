@@ -46,6 +46,8 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 217.2 91.2% 59.8%;
+    /* Ensure UA widgets (form controls, scrollbars) render in dark */
+    color-scheme: dark;
   }
 }
 
@@ -53,6 +55,52 @@ body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: var(--font-sans);
+}
+
+/* Base form control styles using tokens for consistent theming */
+select,
+input,
+textarea,
+button {
+  border-color: hsl(var(--input));
+  color: hsl(var(--foreground));
+}
+
+select,
+input,
+textarea {
+  background-color: hsl(var(--card));
+}
+
+/* Improve native <select> dropdown contrast (where supported) */
+option {
+  background-color: hsl(var(--card));
+  color: hsl(var(--foreground));
+}
+
+/* Highlight states inside native dropdowns (support varies by browser) */
+select option:hover,
+select option:focus {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+select option:checked {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+select option:disabled {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Prefer dark UI widgets when dark is active */
+@media (prefers-color-scheme: dark) {
+  select,
+  input,
+  textarea {
+    color-scheme: dark;
+  }
 }
 
 .status-new {
