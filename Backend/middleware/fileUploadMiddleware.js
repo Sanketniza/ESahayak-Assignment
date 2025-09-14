@@ -2,16 +2,31 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
+// Detect serverless (Vercel) environment and choose a writable directory
+const isVercel = !!process.env.VERCEL;
+const defaultLocalUploads = path.join(__dirname, '../uploads');
+const serverlessUploads = path.join('/tmp', 'uploads');
+const targetUploadsDir = process.env.UPLOAD_DIR || (isVercel ? serverlessUploads : defaultLocalUploads);
+
 // Ensure uploads directory exists
-const uploadsDir = path.join(__dirname, '../uploads');
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
+if (!fs.existsSync(targetUploadsDir)) {
+  try {
+    fs.mkdirSync(targetUploadsDir, { recursive: true });
+  } catch (e) {
+    // Last resort: fallback to /tmp if anything goes wrong
+    if (targetUploadsDir !== serverlessUploads) {
+      try {
+        fs.mkdirSync(serverlessUploads, { recursive: true });
+      } catch (_) {}
+    }
+  }
 }
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, uploadsDir);
+    // Always use the computed target directory
+    cb(null, targetUploadsDir);
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);

@@ -1,0 +1,24 @@
+[build]
+  base = "Frontend"
+  command = "npm ci && npm run build"
+  publish = "Frontend/dist"
+
+[[redirects]]
+  from = "/buyers/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/login"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/register"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
