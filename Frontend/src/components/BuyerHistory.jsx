@@ -7,9 +7,9 @@ import React from 'react';
 const BuyerHistory = ({ historyItems }) => {
   if (!historyItems || historyItems.length === 0) {
     return (
-      <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-        <h2 className="text-lg font-medium text-gray-700 mb-2">History</h2>
-        <p className="text-gray-500 text-sm">No history records available.</p>
+      <div className="bg-secondary p-4 rounded-lg border border-border">
+        <h2 className="text-lg font-medium text-muted-foreground mb-2">History</h2>
+        <p className="text-muted-foreground text-sm">No history records available.</p>
       </div>
     );
   }
@@ -69,23 +69,23 @@ const BuyerHistory = ({ historyItems }) => {
   };
 
   return (
-    <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-      <h2 className="text-lg font-medium text-gray-700 mb-4">History</h2>
+    <div className="bg-secondary p-4 rounded-lg border border-border">
+      <h2 className="text-lg font-medium text-muted-foreground mb-4">History</h2>
       
       <div className="space-y-6">
         {historyItems.map((historyItem) => (
           <div 
             key={historyItem._id} 
-            className="bg-white p-4 rounded-md border border-gray-200 shadow-sm"
+            className="bg-card p-4 rounded-md border border-border shadow-sm"
           >
             <div className="flex justify-between items-start mb-3">
               <div>
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-muted-foreground">
                   {formatDate(historyItem.changedAt)}
                 </span>
               </div>
               <div className="text-sm font-medium">
-                <span className="text-gray-700">
+                <span className="text-foreground">
                   {historyItem.changedBy}
                 </span>
               </div>
@@ -94,13 +94,13 @@ const BuyerHistory = ({ historyItems }) => {
             {historyItem.diff.action ? (
               <div className="text-sm">
                 <span className="font-medium">Action: </span>
-                <span className="text-gray-700">{historyItem.diff.action}</span>
+                <span className="text-foreground">{historyItem.diff.action}</span>
               </div>
             ) : (
               <div className="space-y-2">
                 {Object.entries(historyItem.diff).map(([field, change]) => (
                   <div key={field} className="grid grid-cols-[120px_1fr_1fr] gap-4 text-sm">
-                    <div className="font-medium text-gray-700">{formatFieldName(field)}</div>
+                    <div className="font-medium text-foreground">{formatFieldName(field)}</div>
                     <div className={`text-red-600 line-through ${!change.from ? 'opacity-50' : ''}`}>
                       {formatFieldValue(field, change.from)}
                     </div>

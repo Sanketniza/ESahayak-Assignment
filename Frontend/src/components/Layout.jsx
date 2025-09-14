@@ -3,7 +3,7 @@ import Navigation from './common/Navigation';
 
 const Layout = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen bg-background">
       {/* Header/Navigation */}
       <Navigation />
 
@@ -15,8 +15,8 @@ const Layout = ({ children }) => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 py-6">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600 text-sm">
+      <footer className="bg-card border-t border-border py-6">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-muted-foreground text-sm">
           &copy; {new Date().getFullYear()} Buyer Lead Intake System
         </div>
       </footer>

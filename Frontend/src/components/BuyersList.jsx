@@ -170,11 +170,11 @@ const BuyersList = () => {
 
   return (
     <div className="px-0 py-4 sm:px-0 lg:px-0">
-      <div className="bg-white rounded-xl shadow-sm p-6">
+      <div className="bg-card rounded-xl shadow-sm p-6">
       <div className="sm:flex sm:items-center sm:justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Buyer Leads</h1>
-          <p className="mt-2 text-sm text-gray-700">
+          <h1 className="text-2xl font-semibold text-foreground">Buyer Leads</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
             A list of all buyer leads in your account including their details.
           </p>
         </div>
@@ -183,7 +183,7 @@ const BuyersList = () => {
           <div className="flex items-center space-x-2">
             <button
               onClick={() => setIsImportModalOpen(true)}
-              className="inline-flex items-center justify-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none"
+              className="inline-flex items-center justify-center px-3 py-2 border border-border shadow-sm text-sm font-medium rounded-md text-foreground bg-card hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring"
               title="Import buyers from CSV"
             >
               <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -194,7 +194,7 @@ const BuyersList = () => {
             <a
               href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/buyers/export-csv${window.location.search}`}
               download
-              className="inline-flex items-center justify-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none"
+              className="inline-flex items-center justify-center px-3 py-2 border border-border shadow-sm text-sm font-medium rounded-md text-foreground bg-card hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring"
               title="Export current buyers as CSV"
             >
               <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -206,7 +206,7 @@ const BuyersList = () => {
 
           <Link
             to="/buyers/new"
-            className="inline-flex items-center justify-center px-6 py-3 border border-transparent shadow-xl text-base font-bold rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 transition-all duration-200 transform hover:scale-105"
+            className="inline-flex items-center justify-center px-6 py-3 border border-transparent shadow-xl text-base font-bold rounded-lg text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none focus:ring-4 focus:ring-primary/40 transition-all duration-200 transform hover:scale-105"
             title="Add a new buyer lead"
           >
             ✚ Add New Lead
@@ -215,7 +215,7 @@ const BuyersList = () => {
       </div>
 
       {/* Search and Filters */}
-  <div className="mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
+  <div className="mb-6 bg-secondary p-4 rounded-lg border border-border">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
           {/* Search Input */}
           <div className="col-span-1 md:col-span-2 lg:col-span-1">
@@ -242,7 +242,7 @@ const BuyersList = () => {
           <div className="flex items-end">
             <button
               onClick={handleResetFilters}
-              className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="inline-flex items-center px-4 py-2 border border-border shadow-sm text-sm font-medium rounded-md text-foreground bg-card hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring"
             >
               Clear Filters
             </button>
@@ -284,15 +284,15 @@ const BuyersList = () => {
 
       {/* Error Message */}
       {error && (
-        <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
+        <div className="bg-destructive border-l-4 border-destructive-foreground p-4 mb-6">
           <div className="flex">
             <div className="flex-shrink-0">
-              <svg className="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <svg className="h-5 w-5 text-destructive-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
               </svg>
             </div>
             <div className="ml-3">
-              <p className="text-sm text-red-700">
+              <p className="text-sm text-destructive-foreground">
                 {error}
               </p>
             </div>
@@ -302,7 +302,7 @@ const BuyersList = () => {
 
       {/* Results Count */}
       <div className="mb-4">
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-muted-foreground">
           Showing <span className="font-medium">{buyers.length}</span> results
           {totalCount > 0 && (
             <>
@@ -316,71 +316,71 @@ const BuyersList = () => {
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+            <div className="shadow overflow-hidden border-b border-border sm:rounded-lg">
+              <table className="min-w-full divide-y divide-border">
+                <thead className="bg-secondary">
                   <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Name
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Phone
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       City
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Property Type
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Budget
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Timeline
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Status
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Updated At
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-card divide-y divide-border">
                   {loading ? (
                     <tr>
-                      <td colSpan="9" className="px-6 py-4 text-center text-sm text-gray-500">
+                      <td colSpan="9" className="px-6 py-4 text-center text-sm text-muted-foreground">
                         Loading...
                       </td>
                     </tr>
                   ) : buyers.length === 0 ? (
                     <tr>
-                      <td colSpan="9" className="px-6 py-4 text-center text-sm text-gray-500">
+                      <td colSpan="9" className="px-6 py-4 text-center text-sm text-muted-foreground">
                         No buyers found. Try adjusting your filters.
                       </td>
                     </tr>
                   ) : (
                     buyers.map((buyer) => (
-                      <tr key={buyer._id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <tr key={buyer._id} className="hover:bg-accent">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground">
                           {buyer.fullName}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                           {buyer.phone}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                           {buyer.city}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                           {buyer.propertyType}
                           {buyer.bhk && buyer.propertyType !== 'Plot' && (
                             <span className="ml-1">({buyer.bhk})</span>
                           )}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                           {buyer.budgetMin && buyer.budgetMax ? (
                             <>
                               {formatCurrency(buyer.budgetMin)} - {formatCurrency(buyer.budgetMax)}
@@ -393,34 +393,25 @@ const BuyersList = () => {
                             '-'
                           )}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                           {buyer.timeline === '0-3m' ? '0-3 months' :
                            buyer.timeline === '3-6m' ? '3-6 months' :
                            buyer.timeline === '>6m' ? '>6 months' :
                            buyer.timeline}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                            ${buyer.status === 'New' ? 'bg-blue-100 text-blue-800' :
-                              buyer.status === 'Qualified' ? 'bg-indigo-100 text-indigo-800' :
-                              buyer.status === 'Contacted' ? 'bg-purple-100 text-purple-800' :
-                              buyer.status === 'Visited' ? 'bg-green-100 text-green-800' :
-                              buyer.status === 'Negotiation' ? 'bg-yellow-100 text-yellow-800' :
-                              buyer.status === 'Converted' ? 'bg-green-100 text-green-800' :
-                              'bg-red-100 text-red-800'
-                            }`}
-                          >
+                          <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full status-${buyer.status.toLowerCase()}`}>
                             {buyer.status}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                           {formatDate(buyer.updatedAt)}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <Link to={`/buyers/${buyer._id}`} className="text-indigo-600 hover:text-indigo-900 mr-4">
+                          <Link to={`/buyers/${buyer._id}`} className="text-primary hover:text-primary/90 mr-4">
                             View
                           </Link>
-                          <Link to={`/buyers/${buyer._id}/edit`} className="text-indigo-600 hover:text-indigo-900">
+                          <Link to={`/buyers/${buyer._id}/edit`} className="text-primary hover:text-primary/90">
                             Edit
                           </Link>
                         </td>

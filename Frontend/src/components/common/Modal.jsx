@@ -45,14 +45,14 @@ const Modal = ({ isOpen, onClose, title, children }) => {
         <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" />
         
         {/* Modal panel */}
-        <div className="relative bg-white rounded-lg shadow-xl max-w-3xl w-full mx-auto">
+        <div className="relative bg-card rounded-lg shadow-xl max-w-3xl w-full mx-auto border border-border">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-gray-200">
-            <h3 className="text-lg font-medium text-gray-900">{title}</h3>
+          <div className="flex items-center justify-between p-4 border-b border-border">
+            <h3 className="text-lg font-medium text-foreground">{title}</h3>
             <button
               type="button"
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-500 focus:outline-none"
+              className="text-muted-foreground hover:text-foreground focus:outline-none"
             >
               <span className="sr-only">Close</span>
               <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

@@ -14,7 +14,7 @@ export const SelectFilter = ({
 }) => {
   return (
     <div className={`${className}`}>
-      <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1">
+      <label htmlFor={name} className="block text-sm font-medium text-muted-foreground mb-1">
         {label}
       </label>
       <select
@@ -22,7 +22,7 @@ export const SelectFilter = ({
         name={name}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+        className="block w-full pl-3 pr-10 py-2 text-base bg-card text-foreground border border-input focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm rounded-md"
       >
         {includeEmpty && <option value="">All</option>}
         {options.map((option) => (
@@ -47,7 +47,7 @@ export const SearchInput = ({
   return (
     <div className={`relative ${className}`}>
       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <svg className="h-5 w-5 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
         </svg>
       </div>
@@ -55,7 +55,7 @@ export const SearchInput = ({
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        className="block w-full pl-10 pr-3 py-2 border border-input rounded-md leading-5 bg-card text-foreground placeholder-muted-foreground focus:outline-none focus:placeholder-muted-foreground focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm"
         placeholder={placeholder}
       />
     </div>
@@ -114,10 +114,10 @@ export const Pagination = ({
         <button
           onClick={() => onPageChange(Math.max(1, currentPage - 1))}
           disabled={currentPage === 1}
-          className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md ${
+          className={`relative inline-flex items-center px-4 py-2 border border-border text-sm font-medium rounded-md ${
             currentPage === 1
-              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-              : 'bg-white text-gray-700 hover:bg-gray-50'
+              ? 'bg-muted text-muted-foreground/50 cursor-not-allowed'
+              : 'bg-card text-foreground hover:bg-accent'
           }`}
         >
           Previous
@@ -125,10 +125,10 @@ export const Pagination = ({
         <button
           onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
           disabled={currentPage === totalPages}
-          className={`ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md ${
+          className={`ml-3 relative inline-flex items-center px-4 py-2 border border-border text-sm font-medium rounded-md ${
             currentPage === totalPages
-              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-              : 'bg-white text-gray-700 hover:bg-gray-50'
+              ? 'bg-muted text-muted-foreground/50 cursor-not-allowed'
+              : 'bg-card text-foreground hover:bg-accent'
           }`}
         >
           Next
@@ -137,7 +137,7 @@ export const Pagination = ({
       
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <div>
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-muted-foreground">
             Showing page <span className="font-medium">{currentPage}</span> of{' '}
             <span className="font-medium">{totalPages}</span> pages
           </p>
@@ -147,10 +147,10 @@ export const Pagination = ({
             <button
               onClick={() => onPageChange(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
-              className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium ${
+              className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-border bg-card text-sm font-medium ${
                 currentPage === 1
-                  ? 'text-gray-300 cursor-not-allowed'
-                  : 'text-gray-500 hover:bg-gray-50'
+                  ? 'text-muted-foreground/50 cursor-not-allowed'
+                  : 'text-muted-foreground hover:bg-accent'
               }`}
             >
               <span className="sr-only">Previous</span>
@@ -163,7 +163,7 @@ export const Pagination = ({
               page === '...' ? (
                 <span
                   key={`ellipsis-${index}`}
-                  className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"
+                  className="relative inline-flex items-center px-4 py-2 border border-border bg-card text-sm font-medium text-muted-foreground"
                 >
                   ...
                 </span>
@@ -173,8 +173,8 @@ export const Pagination = ({
                   onClick={() => onPageChange(page)}
                   className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
                     currentPage === page
-                      ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
-                      : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
+                      ? 'z-10 bg-primary/10 border-primary text-primary'
+                      : 'bg-card border-border text-muted-foreground hover:bg-accent'
                   }`}
                 >
                   {page}
@@ -185,10 +185,10 @@ export const Pagination = ({
             <button
               onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
               disabled={currentPage === totalPages}
-              className={`relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium ${
+              className={`relative inline-flex items-center px-2 py-2 rounded-r-md border border-border bg-card text-sm font-medium ${
                 currentPage === totalPages
-                  ? 'text-gray-300 cursor-not-allowed'
-                  : 'text-gray-500 hover:bg-gray-50'
+                  ? 'text-muted-foreground/50 cursor-not-allowed'
+                  : 'text-muted-foreground hover:bg-accent'
               }`}
             >
               <span className="sr-only">Next</span>

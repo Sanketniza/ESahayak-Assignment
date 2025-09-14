@@ -1,46 +1,91 @@
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Base tokens and neutral background for the app */
+/* Light mode (default) - HSL triplets for Tailwind v4 mapping */
 :root {
-  --app-font: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  --muted: #6b7280; /* gray-500 */
-  --bg: #f8fafc; /* gray-50 */
-  --text: #0f172a; /* gray-900 */
-  --primary: #4f46e5; /* indigo-600 */
+  --font-sans: 'Inter', sans-serif;
+  --background: 0 0% 100%;            /* #ffffff */
+  --foreground: 222.2 84% 4.9%;       /* #020817 */
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83% 53%;           /* #2563eb */
+  --primary-foreground: 0 0% 98%;     /* #fafafa */
+  --secondary: 210 40% 96%;           /* #f1f5f9 */
+  --secondary-foreground: 222.2 47.4% 11.2%; /* #0f172a */
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 20.2% 65.1%; /* #64748b */
+  --accent: 210 40% 96%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;       /* #ef4444 */
+  --destructive-foreground: 0 0% 98%;
+  --border: 214.3 31.8% 91.4%;        /* #e2e8f0 */
+  --input: 214.3 31.8% 91.4%;
+  --ring: 215 20.2% 65.1%;            /* #94a3b8 */
 }
 
-html, body, #root {
-  height: 100%;
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 222.2 84% 4.9%;      /* #020817 */
+    --foreground: 210 40% 98%;         /* #fafafa */
+    --card: 222.2 47.4% 11.2%;         /* near #0b1220 */
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 47.4% 11.2%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;      /* #3b82f6 */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217.2 32.6% 17.5%;    /* #1e293b */
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 25%;          /* #7f1d1d */
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 217.2 91.2% 59.8%;
+  }
 }
 
 body {
-  margin: 0;
-  font-family: var(--app-font);
-  color: var(--text);
-  background-color: var(--bg);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
 }
 
-/* Stronger base headings */
-h1 { font-size: 2.25rem; line-height: 1.1; }
-
-/* Links use the primary color */
-a { color: var(--primary); font-weight: 500; }
-a:hover { color: #4338ca; }
-
-/* Remove broad global button overrides - prefer Tailwind utility classes */
-button { font-family: inherit; }
-
-/* Make forms and inputs more consistent when components rely on browser defaults */
-input, textarea, select {
-  font-family: inherit;
-  color: var(--text);
+.status-new {
+  background-color: #bfdbfe;
+  color: #1e40af;
 }
 
-@media (prefers-color-scheme: dark) {
-  /* Keep light mode as default for now; dark mode adjustments can be added later */
+.status-qualified {
+  background-color: #c7d2fe;
+  color: #4338ca;
+}
+
+.status-contacted {
+  background-color: #e9d5ff;
+  color: #7e22ce;
+}
+
+.status-visited {
+  background-color: #bbf7d0;
+  color: #166534;
+}
+
+.status-negotiation {
+  background-color: #fef08a;
+  color: #854d0e;
+}
+
+.status-converted {
+  background-color: #86efac;
+  color: #15803d;
+}
+
+.status-dropped {
+  background-color: #fecaca;
+  color: #991b1b;
 }

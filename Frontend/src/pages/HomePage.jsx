@@ -7,69 +7,69 @@ const HomePage = () => {
   
   return (
     <div className="container mx-auto py-12 px-4 text-center">
-      <h1 className="text-4xl font-bold mb-6 text-gray-800">Buyer Lead Intake System</h1>
-      <p className="text-xl mb-8 text-gray-600">Manage your real estate buyer leads efficiently</p>
-      
+      <h1 className="text-4xl font-bold mb-6 text-foreground">Buyer Lead Intake System</h1>
+      <p className="text-xl mb-8 text-muted-foreground">Manage your real estate buyer leads efficiently</p>
+
       <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
         {user ? (
           <>
-            <Link 
-              to="/buyers/new" 
-              className="px-8 py-4 bg-green-600 text-white text-lg font-bold rounded-xl hover:bg-green-700 transition-all transform hover:scale-105 shadow-xl border-2 border-green-500"
+            <Link
+              to="/buyers/new"
+              className="px-8 py-4 text-lg font-bold rounded-xl shadow-xl border-2 bg-success text-success-foreground border-success"
             >
               ✚ Create New Lead
             </Link>
-            <Link 
-              to="/buyers" 
-              className="px-8 py-4  text-zinc-6 text-lg font-semibold rounded-xl transition-all transform hover:scale-105 shadow-lg border-2 border-blue-500"
+            <Link
+              to="/buyers"
+              className="px-8 py-4 text-lg font-semibold rounded-xl shadow-lg border-2 bg-primary text-primary-foreground border-primary"
             >
               📊 View All Leads
             </Link>
           </>
         ) : (
           <>
-            <Link 
-              to="/login" 
-              className="px-8 py-4 bg-indigo-600 text-white text-lg font-bold rounded-xl hover:bg-indigo-700 transition-all transform hover:scale-105 shadow-xl"
+            <Link
+              to="/login"
+              className="px-8 py-4 text-lg font-bold rounded-xl shadow-xl bg-primary text-primary-foreground"
             >
               Sign In
             </Link>
-            <Link 
-              to="/register" 
-              className="px-8 py-4 bg-green-600 text-white text-lg font-semibold rounded-xl hover:bg-green-700 transition-all transform hover:scale-105 shadow-lg"
+            <Link
+              to="/register"
+              className="px-8 py-4 text-lg font-semibold rounded-xl shadow-lg bg-success text-success-foreground"
             >
               Create Account
             </Link>
           </>
         )}
       </div>
-      
+
       <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="font-bold text-lg mb-2">Create Leads</h3>
-          <p className="text-gray-600">Capture buyer information with validation and assign to users.</p>
+        <div className="card p-6 rounded-lg shadow-md">
+          <h3 className="font-bold text-lg mb-2 text-foreground">Create Leads</h3>
+          <p className="text-muted-foreground">Capture buyer information with validation and assign to users.</p>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="font-bold text-lg mb-2">Search & Filter</h3>
-          <p className="text-gray-600">Easily find and manage leads with advanced filtering options.</p>
+        <div className="card p-6 rounded-lg shadow-md">
+          <h3 className="font-bold text-lg mb-2 text-foreground">Search & Filter</h3>
+          <p className="text-muted-foreground">Easily find and manage leads with advanced filtering options.</p>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="font-bold text-lg mb-2">Import & Export</h3>
-          <p className="text-gray-600">Bulk import leads from CSV and export filtered results.</p>
+        <div className="card p-6 rounded-lg shadow-md">
+          <h3 className="font-bold text-lg mb-2 text-foreground">Import & Export</h3>
+          <p className="text-muted-foreground">Bulk import leads from CSV and export filtered results.</p>
         </div>
       </div>
-      
+
       {user && (
-        <div className="mt-12 p-6 bg-indigo-50 rounded-lg max-w-2xl mx-auto">
-          <h2 className="text-xl font-semibold text-indigo-800 mb-4">
+        <div className="mt-12 card p-6 rounded-lg max-w-2xl mx-auto">
+          <h2 className="text-xl font-semibold mb-4 text-primary">
             Welcome back, {user.name}!
           </h2>
-          <p className="text-indigo-700 mb-4">
+          <p className="mb-4 text-accent-foreground">
             You are now authenticated and have full access to the buyer lead management system.
           </p>
           <Link
             to="/buyers"
-            className="inline-block px-8 py-4 bg-green-600 text-white text-lg font-bold rounded-xl hover:bg-green-700 transition-all transform hover:scale-105 shadow-xl border-2 border-green-500"
+            className="inline-block px-8 py-4 text-lg font-bold rounded-xl shadow-xl border-2 bg-success text-success-foreground border-success"
           >
             🚀 Go to My Dashboard
           </Link>

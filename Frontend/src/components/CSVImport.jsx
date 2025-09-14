@@ -90,16 +90,16 @@ const CSVImport = ({ onImportComplete, onCancel }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="bg-card rounded-lg shadow p-6 border border-border">
       <div className="mb-6">
-        <h2 className="text-lg font-medium text-gray-900 mb-2">Import Buyers from CSV</h2>
-        <p className="text-sm text-gray-600">
+  <h2 className="text-lg font-medium text-foreground mb-2">Import Buyers from CSV</h2>
+  <p className="text-sm text-muted-foreground">
           Upload a CSV file with buyer information. The file must have the following headers:
         </p>
-        <div className="bg-gray-50 p-3 mt-2 rounded text-xs font-mono overflow-x-auto">
+  <div className="bg-secondary p-3 mt-2 rounded text-xs font-mono overflow-x-auto text-muted-foreground">
           fullName,email,phone,city,propertyType,bhk,purpose,budgetMin,budgetMax,timeline,source,notes,tags,status
         </div>
-        <p className="mt-2 text-sm text-gray-600">
+  <p className="mt-2 text-sm text-muted-foreground">
           Maximum 200 rows will be imported. Each row will be validated.
         </p>
       </div>
@@ -107,7 +107,7 @@ const CSVImport = ({ onImportComplete, onCancel }) => {
       {/* File upload area */}
       {!importResult && (
         <div className="space-y-4">
-          <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+          <div className="border-2 border-dashed border-border rounded-lg p-6 text-center bg-secondary/30">
             <input
               type="file"
               ref={fileInputRef}
@@ -118,7 +118,7 @@ const CSVImport = ({ onImportComplete, onCancel }) => {
             />
             <label 
               htmlFor="csv-file-input"
-              className="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none"
+              className="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-primary-foreground bg-primary/20 hover:bg-primary/30 focus:outline-none"
             >
               Select CSV File
             </label>
@@ -131,15 +131,15 @@ const CSVImport = ({ onImportComplete, onCancel }) => {
           
           {/* Error message */}
           {error && (
-            <div className="bg-red-50 border-l-4 border-red-400 p-4">
+            <div className="bg-destructive/10 border-l-4 border-destructive p-4">
               <div className="flex">
                 <div className="flex-shrink-0">
-                  <svg className="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <svg className="h-5 w-5 text-destructive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                   </svg>
                 </div>
                 <div className="ml-3">
-                  <p className="text-sm text-red-700">{error}</p>
+                  <p className="text-sm text-destructive-foreground">{error}</p>
                 </div>
               </div>
             </div>
@@ -150,7 +150,7 @@ const CSVImport = ({ onImportComplete, onCancel }) => {
             <button
               type="button"
               onClick={handleCancel}
-              className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+              className="inline-flex items-center px-4 py-2 border border-border text-sm font-medium rounded-md text-foreground bg-card hover:bg-accent"
               disabled={isUploading}
             >
               Cancel
@@ -158,7 +158,7 @@ const CSVImport = ({ onImportComplete, onCancel }) => {
             <button
               type="button"
               onClick={handleUpload}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={!file || isUploading}
             >
               {isUploading ? 'Uploading...' : 'Upload and Import'}
@@ -170,7 +170,7 @@ const CSVImport = ({ onImportComplete, onCancel }) => {
       {/* Import results */}
       {importResult && (
         <div className="space-y-4">
-          <div className={`rounded-md p-4 ${importResult.success ? 'bg-green-50' : 'bg-yellow-50'}`}>
+          <div className={`rounded-md p-4 ${importResult.success ? 'bg-green-500/10' : 'bg-yellow-500/10'}`}>
             <div className="flex">
               <div className="flex-shrink-0">
                 {importResult.success ? (
@@ -184,7 +184,7 @@ const CSVImport = ({ onImportComplete, onCancel }) => {
                 )}
               </div>
               <div className="ml-3">
-                <h3 className={`text-sm font-medium ${importResult.success ? 'text-green-800' : 'text-yellow-800'}`}>
+                <h3 className={`text-sm font-medium ${importResult.success ? 'text-green-400' : 'text-yellow-400'}`}>
                   {importResult.message}
                 </h3>
                 <div className="mt-2 text-sm">
@@ -201,26 +201,26 @@ const CSVImport = ({ onImportComplete, onCancel }) => {
           {/* Error table */}
           {importResult.errors && importResult.errors.length > 0 && (
             <div className="mt-4">
-              <h3 className="text-sm font-medium text-gray-700 mb-2">Error Details</h3>
-              <div className="overflow-x-auto shadow border-b border-gray-200 sm:rounded-lg">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+              <h3 className="text-sm font-medium text-muted-foreground mb-2">Error Details</h3>
+              <div className="overflow-x-auto shadow border-b border-border sm:rounded-lg">
+                <table className="min-w-full divide-y divide-border">
+                  <thead className="bg-secondary">
                     <tr>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                         Row #
                       </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                         Error Message
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-card divide-y divide-border">
                     {importResult.errors.map((error, index) => (
                       <tr key={index}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground">
                           {error.row}
                         </td>
-                        <td className="px-6 py-4 whitespace-normal text-sm text-gray-500">
+                        <td className="px-6 py-4 whitespace-normal text-sm text-muted-foreground">
                           {error.message}
                         </td>
                       </tr>
@@ -235,7 +235,7 @@ const CSVImport = ({ onImportComplete, onCancel }) => {
             <button
               type="button"
               onClick={onCancel || (() => setImportResult(null))}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-primary-foreground bg-primary/20 hover:bg-primary/30 focus:outline-none"
             >
               {importResult.success ? 'Done' : 'Try Again'}
             </button>
