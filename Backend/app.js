@@ -16,7 +16,18 @@ connectDB();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+
+// CORS configured via environment (fallback to all during local dev)
+const allowedOrigin = process.env.CORS_ORIGIN || '*';
+app.use(
+  cors({
+    origin: allowedOrigin,
+    credentials: true,
+  })
+);
+
+// Handle preflight quickly
+app.options('*', cors({ origin: allowedOrigin, credentials: true }));
 app.use(morgan('dev'));
 app.use(rateLimit());
 
