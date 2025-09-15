@@ -101,7 +101,7 @@ export const buyersApi = {
   // Export buyers to CSV
   exportCSV: async (filters = {}) => {
     try {
-      const response = await apiClient.get('/buyers/export', {
+      const response = await apiClient.get('/buyers/export-csv', {
         params: filters,
         responseType: 'blob',
       });
@@ -116,9 +116,9 @@ export const buyersApi = {
   importCSV: async (file) => {
     try {
       const formData = new FormData();
-      formData.append('csvFile', file);
+      formData.append('file', file);
       
-      const response = await apiClient.post('/buyers/import', formData, {
+      const response = await apiClient.post('/buyers/import-csv', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
