@@ -58,6 +58,7 @@ const Register = () => {
               id="name"
               type="text"
               {...register('name')}
+              autoComplete="name"
               className="mt-1 block w-full px-3 py-2 border border-border rounded-md shadow-sm focus:ring-ring focus:border-ring"
               placeholder="Your full name"
             />
@@ -66,19 +67,19 @@ const Register = () => {
 
           <div>
             <label className="block text-sm font-medium text-muted-foreground text-left">Email address</label>
-            <input id="email" type="email" {...register('email')} className="mt-1 block w-full px-3 py-2 border border-border rounded-md shadow-sm focus:ring-ring focus:border-ring" placeholder="you@example.com" />
+            <input id="email" type="email" {...register('email')} autoComplete="email" className="mt-1 block w-full px-3 py-2 border border-border rounded-md shadow-sm focus:ring-ring focus:border-ring" placeholder="you@example.com" />
             {errors.email && <p className="mt-1 text-sm text-destructive">{errors.email.message}</p>}
           </div>
 
           <div>
             <label className="block text-sm font-medium text-muted-foreground text-left">Password</label>
-            <input id="password" type="password" {...register('password')} className="mt-1 block w-full px-3 py-2 border border-border rounded-md shadow-sm focus:ring-ring focus:border-ring" placeholder="********" />
+            <input id="password" type="password" {...register('password')} autoComplete="new-password" className="mt-1 block w-full px-3 py-2 border border-border rounded-md shadow-sm focus:ring-ring focus:border-ring" placeholder="********" />
             {errors.password && <p className="mt-1 text-sm text-destructive">{errors.password.message}</p>}
           </div>
 
           <div>
             <label className="block text-sm font-medium text-muted-foreground text-left">Confirm Password</label>
-            <input id="passwordConfirm" type="password" {...register('passwordConfirm')} className="mt-1 block w-full px-3 py-2 border border-border rounded-md shadow-sm focus:ring-ring focus:border-ring" placeholder="********" />
+            <input id="passwordConfirm" type="password" {...register('passwordConfirm')} autoComplete="new-password" className="mt-1 block w-full px-3 py-2 border border-border rounded-md shadow-sm focus:ring-ring focus:border-ring" placeholder="********" />
             {errors.passwordConfirm && <p className="mt-1 text-sm text-destructive">{errors.passwordConfirm.message}</p>}
           </div>
 
