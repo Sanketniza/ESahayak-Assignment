@@ -33,7 +33,9 @@ const corsOptions = {
     if (allowedOrigins === '*' || allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
-    return callback(new Error(`CORS not allowed from origin: ${origin}`));
+    console.warn(`[CORS] Blocked origin: ${origin}`);
+    // Disable CORS for this request without throwing an error (avoids 500)
+    return callback(null, false);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],

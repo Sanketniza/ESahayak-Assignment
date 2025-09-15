@@ -37,7 +37,8 @@ const sendTokenResponse = (user, statusCode, res) => {
   const cookieOptions = {
     expires: expiry,
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production'
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
   };
   
   res.cookie('token', token, cookieOptions);
