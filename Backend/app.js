@@ -43,8 +43,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-// Handle preflight quickly
-app.options('*', cors(corsOptions));
+// Handle preflight for all routes (use regex to avoid path-to-regexp '*' error)
+app.options(/.*/, cors(corsOptions));
 app.use(morgan('dev'));
 app.use(rateLimit());
 
