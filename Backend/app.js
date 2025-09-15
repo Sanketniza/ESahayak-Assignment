@@ -45,6 +45,24 @@ const corsOptions = {
 app.use(cors(corsOptions));
 // Handle preflight for all routes (use regex to avoid path-to-regexp '*' error)
 app.options(/.*/, cors(corsOptions));
+
+// Fallback: manual OPTIONS handler to guarantee 204 with proper headers
+app.use((req, res, next) => {
+  if (req.method !== 'OPTIONS') return next();
+  const origin = req.headers.origin;
+  const originAllowed = !origin || allowedOrigins === '*' || allowedOrigins.includes(origin);
+  if (originAllowed && origin) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Vary', 'Origin');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+    res.header(
+      'Access-Control-Allow-Headers',
+      req.headers['access-control-request-headers'] || 'Content-Type, Authorization'
+    );
+  }
+  return res.sendStatus(204);
+});
 app.use(morgan('dev'));
 app.use(rateLimit());
 
