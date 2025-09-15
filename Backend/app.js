@@ -17,17 +17,30 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// CORS configured via environment (fallback to all during local dev)
-const allowedOrigin = process.env.CORS_ORIGIN || '*';
-app.use(
-  cors({
-    origin: allowedOrigin,
-    credentials: true,
-  })
-);
+// CORS configured via environment: support multiple comma-separated origins
+const rawOrigins = process.env.CORS_ORIGIN || '*';
+const allowedOrigins = rawOrigins === '*'
+  ? '*'
+  : rawOrigins
+      .split(',')
+      .map(o => o.trim())
+      .filter(Boolean);
 
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Allow no-origin requests (mobile apps, curl, same-origin on server)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins === '*' || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error(`CORS not allowed from origin: ${origin}`));
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 // Handle preflight quickly
-app.options('*', cors({ origin: allowedOrigin, credentials: true }));
+app.options('*', cors(corsOptions));
 app.use(morgan('dev'));
 app.use(rateLimit());
 
